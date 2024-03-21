@@ -40,8 +40,14 @@ class _TextInputWidgetState extends State<TextInputWidget> {
   void _clearField() {
     if (_controller.text.isNotEmpty) {
       _controller.clear();
+      setState(() {
+        _enteredText = '';
+      });
     } else {
       _controller.clear();
+      setState(() {
+        _enteredText = '';
+      });
       showDialog(
         context: context,
         builder: (BuildContext context) {
