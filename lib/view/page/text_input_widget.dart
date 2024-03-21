@@ -12,13 +12,54 @@ class _TextInputWidgetState extends State<TextInputWidget> {
   String _enteredText = '';
 
   void _submitText() {
-    setState(() {
-      _enteredText = _controller.text;
-    });
+    if (_controller.text.isNotEmpty) {
+      setState(() {
+        _enteredText = _controller.text;
+      });
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Warning'),
+            content: const Text('Please enter text in the field!'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   void _clearField() {
-    _controller.clear();
+    if (_controller.text.isNotEmpty) {
+      _controller.clear();
+    } else {
+      _controller.clear();
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Warning'),
+            content: const Text('The field is already empty!'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override
