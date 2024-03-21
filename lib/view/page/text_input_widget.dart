@@ -17,6 +17,10 @@ class _TextInputWidgetState extends State<TextInputWidget> {
     });
   }
 
+  void _clearField() {
+    _controller.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -48,6 +52,12 @@ class _TextInputWidgetState extends State<TextInputWidget> {
                       _submitText();
                     },
                     child: const Text('Submit'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      _clearField();
+                    },
+                    child: const Text('Clear field'),
                   ),
                 ],
               ),
